@@ -1,5 +1,5 @@
 RSpec.describe 'POST /api/comments', type: :reequest do
-  let!(:comment) { create(:comment) }
+  # let!(:comment) { create(:comment) }
   describe 'succesfully' do
     before do
       post '/api/comments', params: {
@@ -26,5 +26,17 @@ RSpec.describe 'POST /api/comments', type: :reequest do
     end
   end
   describe 'unsuccessfully' do
+    describe 'comment contains a empty body' do
+      before do
+        post '/api/comments', params: {
+          comment: {
+            body: ''
+          }
+        }
+      end
+    end
+    it 'is expected to return an error message' do
+      expect(response_json['message']).to eq "Comment body can't be blank"
+    end
   end
 end
