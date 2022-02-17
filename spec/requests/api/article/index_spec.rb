@@ -1,8 +1,6 @@
 RSpec.describe 'GET /api/articles', type: :request do
-  # let!(:comment) { create(:comment, article: article1) }
   let!(:comment) { create(:comment) }
-  # let!(:article1) { create(:article) }
-  let!(:articles) { 3.times { create(:article, comment: comment) } }
+  let!(:articles) { 3.times { create(:article, comment_id: comment.id) } }
   describe 'successfully' do
     before do
       get '/api/articles'
